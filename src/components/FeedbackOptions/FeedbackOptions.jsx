@@ -1,25 +1,19 @@
 import PropTypes from 'prop-types';
 import { Button } from './FeedbackOptions.styled';
-export default function FeedbackOptions({ onLeaveFeedback }) {
-    return (
-         <div>
-          <Button type="button" onClick={onLeaveFeedback} data-value="good">
-            Good
-          </Button>
-          <Button
-            type="button"
-            onClick={onLeaveFeedback}
-            data-value="neutral"
-          >
-            Neutral
-          </Button>
-          <Button type="button" onClick={onLeaveFeedback} data-value="bad">
-            Bad
-          </Button>
-        </div>
-    )
+import { nanoid } from 'nanoid';
+export default function FeedbackOptions({ options, onLeaveFeedback }) {
+  return (
+    <div>
+      {options.map(option => (
+        <Button key={nanoid()} type="button" onClick={onLeaveFeedback}>
+          {option}
+        </Button>
+      ))}
+    </div>
+  );
 }
 
 FeedbackOptions.propTypes = {
-    onLeaveFeedback: PropTypes.func.isRequired
-}
+  onLeaveFeedback: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
+};

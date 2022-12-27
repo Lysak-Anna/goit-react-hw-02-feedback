@@ -11,9 +11,9 @@ class App extends Component {
     bad: 0,
   };
   clickHandler = e => {
-    const target = e.currentTarget.dataset.value;
+    const option = e.currentTarget.textContent;
     this.setState(prevState => {
-      return { [target]: prevState[target] + 1 };
+      return { [option]: prevState[option] + 1 };
     });
   };
   countTotalFeedback() {
@@ -32,7 +32,10 @@ class App extends Component {
     return (
       <div className="App">
         <Section title="Please leave feedback">
-          <FeedbackOptions onLeaveFeedback={this.clickHandler} />
+          <FeedbackOptions
+            options={['good', 'neutral', 'bad']}
+            onLeaveFeedback={this.clickHandler}
+          />
           {total === 0 ? (
             <Notification message="There is no feedback" />
           ) : (
